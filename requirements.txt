@@ -2,4 +2,4 @@ pyYAML
 Jinja2
 argparse
 xmltodict
-project_generator_definitions>=0.2.2,<0.3.0
+-e git://github.com/Automatic/firmware-project_generator_definitions.git#egg=project_generator_definitions
