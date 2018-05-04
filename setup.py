@@ -13,19 +13,20 @@
 # limitations under the License.
 
 import os
-import pip
 
-from pip.req import parse_requirements
 from setuptools import setup, find_packages
 
 def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+    with open(os.path.join(os.path.dirname(__file__), fname), 'r') as f:
+        return f.read()
 
-requirements = [str(requirement.req) for requirement in parse_requirements('requirements.txt', session=pip.download.PipSession())]
+def read_requirements():
+    req_lines = read('requirements.txt').splitlines()
+    return [req for req in req_lines if len(req) > 0 and not req.startswith("#")]
 
 setup(
     name='project_generator',
-    version='0.9.10',
+    version='0.9.11',
     description='Project generators for various embedded tools (IDE). IAR, uVision, Makefile and many more in the roadmap!',
     author='Martin Kojtal',
     author_email='c0170@rocketmail.com',
@@ -48,6 +49,6 @@ setup(
         ]
     },
 
-    install_requires = requirements,
+    install_requires = read_requirements(),
     include_package_data = True,
 )
